@@ -1,0 +1,73 @@
+.system-app-shell {
+    color: #e8eef7;
+    padding: 18px;
+}
+
+.system-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.system-card {
+    background: rgba(12, 18, 34, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+    border-radius: 18px;
+}
+
+.system-card .ant-card-head {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.system-card .ant-card-body {
+    background: transparent;
+}
+
+.camera-panel,
+.usb-panel,
+.monitor-panel,
+.resource-panel {
+    display: grid;
+    gap: 16px;
+}
+
+.camera-preview {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.22);
+}
+
+.camera-preview video {
+    width: 100%;
+    display: block;
+    min-height: 220px;
+}
+
+.mount-action {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.mount-action p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.system-status {
+    display: grid;
+    gap: 14px;
+}
+
+.system-status .status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #c8d2e6;
+}
+
+.system-status .status-row span {
+    font-weight: 600;
+}

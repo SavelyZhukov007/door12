@@ -1,0 +1,97 @@
+.calculator {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #1e1e1e;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.calc-display {
+  padding: 16px 20px 8px;
+  text-align: right;
+  border-bottom: 1px solid #333;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.calc-expression {
+  color: #888;
+  font-size: 14px;
+  min-height: 20px;
+  margin-bottom: 4px;
+}
+
+.calc-value {
+  color: #fff;
+  font-size: 36px;
+  font-weight: 300;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  flex: 1;
+  background: #333;
+}
+
+.calc-btn {
+  background: #2b2b2b;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.1s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calc-btn:hover {
+  background: #3a3a3a;
+}
+
+.calc-btn:active {
+  background: #505050;
+}
+
+.op-btn {
+  background: #252525;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.op-btn:hover {
+  background: #333;
+}
+
+.active-op {
+  background: #2d4a6b;
+  color: #60a5fa;
+  font-size: 22px;
+}
+
+.active-op:hover {
+  background: #3a5a80;
+}
+
+.equals-btn {
+  background: #0066cc;
+  color: #fff;
+  font-size: 22px;
+}
+
+.equals-btn:hover {
+  background: #0077ee;
+}
+
+.num-btn {
+  background: #2b2b2b;
+  font-size: 18px;
+}

@@ -1,0 +1,204 @@
+.settings {
+  display: flex;
+  height: 100%;
+  background: #1e1e1e;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.settings-sidebar {
+  width: 220px;
+  background: #252526;
+  border-right: 1px solid #3c3c3c;
+  padding: 12px 0;
+  flex-shrink: 0;
+}
+
+.settings-sidebar-title {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 16px 16px;
+}
+
+.settings-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: #ccc;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 13px;
+  border-radius: 0 4px 4px 0;
+  margin-right: 8px;
+}
+
+.settings-nav-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+}
+
+.settings-nav-item.active {
+  background: rgba(0, 102, 204, 0.35);
+  color: #60a5fa;
+}
+
+.settings-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.settings-section h2 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.settings-group {
+  background: #252526;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.settings-group h3 {
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  color: #d4d4d4;
+  font-size: 14px;
+  border-bottom: 1px solid #333;
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-row>span:first-child {
+  flex: 1;
+}
+
+.status-badge {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.status-badge.connected {
+  background: rgba(46, 204, 113, 0.2);
+  color: #2ecc71;
+}
+
+.color-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.color-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.2);
+  border-color: #fff;
+}
+
+.account-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.account-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0066cc, #004999);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.account-name {
+  color: #fff;
+  font-size: 18px;
+}
+
+.account-role {
+  color: #888;
+  font-size: 13px;
+}
+
+.settings-input {
+  background: #1e1e1e;
+  border: 1px solid #444;
+  border-radius: 4px;
+  color: #d4d4d4;
+  padding: 4px 8px;
+  font-size: 14px;
+  outline: none;
+  width: 200px;
+}
+
+.settings-input:focus {
+  border-color: #0066cc;
+}
+
+.about-group {
+  text-align: center;
+}
+
+.about-logo {
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  margin: 16px 0 8px;
+  letter-spacing: -2px;
+}
+
+.about-version {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.about-table {
+  width: 100%;
+  text-align: left;
+}
+
+.about-table td {
+  padding: 6px 8px;
+  color: #ccc;
+  font-size: 13px;
+}
+
+.about-key {
+  color: #888 !important;
+  width: 140px;
+}
