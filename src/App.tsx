@@ -14,6 +14,7 @@ import Settings from './components/apps/Settings/Settings';
 import Terminal from './components/apps/Terminal/Terminal';
 import TaskManager from './components/apps/TaskManager/TaskManager';
 import { SystemMonitorApp, ResourceMonitorApp, CameraApp, UsbManagerApp } from './components/apps/SystemApps';
+import Racing from './components/apps/Racing/Racing';
 
 import { AppWindow, AppDefinition, DesktopIcon, FileSystemNode, Process, UsbDevice } from './types';
 import { initialFileSystem, generateId, deleteNode } from './store/fileSystem';
@@ -31,6 +32,7 @@ const APP_REGISTRY: AppDefinition[] = [
   { id: 'resource-monitor', name: 'Монитор ресурсов', icon: '📈', component: ResourceMonitorApp as any, defaultWidth: 780, defaultHeight: 520, minWidth: 560, minHeight: 360, singleInstance: true },
   { id: 'camera', name: 'Камера', icon: '📷', component: CameraApp as any, defaultWidth: 760, defaultHeight: 540, minWidth: 500, minHeight: 340, singleInstance: true },
   { id: 'usb-manager', name: 'USB Менеджер', icon: '🔌', component: UsbManagerApp as any, defaultWidth: 720, defaultHeight: 480, minWidth: 500, minHeight: 320, singleInstance: true },
+  { id: 'racing', name: 'Гонки', icon: '🏎', component: Racing as any, defaultWidth: 800, defaultHeight: 560, minWidth: 800, minHeight: 560, singleInstance: true },
 ];
 
 const INITIAL_DESKTOP_ICONS: DesktopIcon[] = [
@@ -44,6 +46,7 @@ const INITIAL_DESKTOP_ICONS: DesktopIcon[] = [
   { id: 'di-camera', name: 'Камера', icon: '📷', appId: 'camera', x: 20, y: 650 },
   { id: 'di-usb', name: 'USB Менеджер', icon: '🔌', appId: 'usb-manager', x: 120, y: 110 },
   { id: 'di-welcome', name: 'Welcome.txt', icon: '📄', fileNodeId: 'welcome-txt', x: 120, y: 20 },
+  { id: 'di-racing', name: 'Гонки', icon: '🏎', appId: 'racing', x: 120, y: 200 },
 ];
 
 const WALLPAPERS = [
@@ -142,6 +145,7 @@ const App: React.FC = () => {
           camera: 14,
           'usb-manager': 5,
           settings: 7,
+          racing: 22,
         };
 
         const weight = weights[proc.appId] ?? 6;
