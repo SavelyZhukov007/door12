@@ -67,17 +67,9 @@
   font-size: 12px;
 }
 
-.stat-val.blue {
-  color: #00d4ff;
-}
-
-.stat-val.yellow {
-  color: #ffeaa7;
-}
-
-.stat-val.purple {
-  color: #a29bfe;
-}
+.stat-val.blue { color: #00d4ff; }
+.stat-val.yellow { color: #ffeaa7; }
+.stat-val.purple { color: #a29bfe; }
 
 .racing-hotkeys {
   background: #0d1117;
@@ -177,7 +169,7 @@ kbd {
 }
 
 .racing-gameover {
-  background: rgba(255, 71, 87, 0.12);
+  background: rgba(255,71,87,0.12);
   border: 1px solid #ff4757;
   border-radius: 6px;
   padding: 10px;
