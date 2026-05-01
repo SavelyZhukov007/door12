@@ -36,7 +36,7 @@ const Snake: React.FC<AppProps> = () => {
   const [uiStarted, setUiStarted] = useState(false);
   const [uiPaused, setUiPaused] = useState(false);
   const pausedRef = useRef(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const placeFood = (snake: Pt[]): Pt => {
     let p: Pt;

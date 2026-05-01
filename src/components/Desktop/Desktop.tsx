@@ -2,6 +2,11 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { animate } from 'animejs';
 import { DesktopIcon, FileSystemNode } from '../../types';
 import { getChildren, generateId, addNode } from '../../store/fileSystem';
+import { AppIcon } from '../Icons';
+import {
+  IcoFolder, IcoNewFile, IcoNewFolder, IcoOpen, IcoTrash,
+  IcoTerminal, IcoTaskManager, IcoSysmon, IcoUsb, IcoSettings
+} from '../Icons';
 import './Desktop.css';
 
 interface ContextMenuState {
@@ -37,18 +42,18 @@ const Desktop: React.FC<DesktopProps> = ({
       .map((f, i) => ({
         id: generateId(),
         name: f.name,
-        icon: f.type === 'folder' ? '📁' : '📄',
+        icon: f.type === 'folder' ? 'explorer' : 'file',
         fileNodeId: f.id,
         x: 20 + (i % 2) * 100,
         y: 20 + Math.floor(i / 2) * 90,
       }));
     if (newIcons.length > 0) onIconsChange([...icons, ...newIcons]);
-  }, [fileSystem, icons, onIconsChange]);
+  }, [fileSystem]);
 
   useEffect(() => {
-    iconsRef.current.forEach((el, id) => {
+    iconsRef.current.forEach((el) => {
       if (el) {
-        animate(el, { opacity: [0, 1], translateY: [12, 0], duration: 300, ease: 'outCubic', delay: Math.random() * 100 });
+        animate(el, { opacity: [0, 1], translateY: [8, 0], duration: 250, ease: 'outCubic', delay: Math.random() * 120 });
       }
     });
   }, []);
@@ -71,9 +76,8 @@ const Desktop: React.FC<DesktopProps> = ({
   };
 
   const handleIconDoubleClick = (icon: DesktopIcon) => {
-    if (icon.appId) {
-      onOpenApp(icon.appId);
-    } else if (icon.fileNodeId) {
+    if (icon.appId) onOpenApp(icon.appId);
+    else if (icon.fileNodeId) {
       const node = fileSystem.find(n => n.id === icon.fileNodeId);
       if (node) onOpenFile(node);
     }
@@ -84,12 +88,9 @@ const Desktop: React.FC<DesktopProps> = ({
     const startX = e.clientX - icon.x;
     const startY = e.clientY - icon.y;
     setSelected(icon.id);
-
     const onMove = (ev: MouseEvent) => {
       onIconsChange(icons.map(i => i.id === icon.id
-        ? { ...i, x: Math.max(0, ev.clientX - startX), y: Math.max(0, ev.clientY - startY) }
-        : i
-      ));
+        ? { ...i, x: Math.max(0, ev.clientX - startX), y: Math.max(0, ev.clientY - startY) } : i));
     };
     const onUp = () => {
       document.removeEventListener('mousemove', onMove);
@@ -101,40 +102,26 @@ const Desktop: React.FC<DesktopProps> = ({
 
   const deleteIcon = (id: string) => {
     const icon = icons.find(i => i.id === id);
-    if (icon?.fileNodeId) {
-      onFileSystemChange(fileSystem.filter(n => n.id !== icon.fileNodeId));
-    }
+    if (icon?.fileNodeId) onFileSystemChange(fileSystem.filter(n => n.id !== icon.fileNodeId));
     onIconsChange(icons.filter(i => i.id !== id));
     setContextMenu(m => ({ ...m, visible: false }));
   };
 
   const createNewFile = () => {
-    const name = `Новый документ ${Date.now().toString().slice(-4)}.txt`;
+    const name = `doc_${Date.now().toString().slice(-5)}.txt`;
     const node: FileSystemNode = {
-      id: generateId(),
-      name,
-      type: 'file',
-      extension: 'txt',
-      parentId: 'desktop',
-      content: '',
-      createdAt: Date.now(),
-      modifiedAt: Date.now(),
-      size: 0,
+      id: generateId(), name, type: 'file', extension: 'txt',
+      parentId: 'desktop', content: '', createdAt: Date.now(), modifiedAt: Date.now(), size: 0,
     };
     onFileSystemChange(addNode(fileSystem, node));
     setContextMenu(m => ({ ...m, visible: false }));
   };
 
   const createNewFolder = () => {
-    const name = `Новая папка ${Date.now().toString().slice(-4)}`;
+    const name = `folder_${Date.now().toString().slice(-5)}`;
     const node: FileSystemNode = {
-      id: generateId(),
-      name,
-      type: 'folder',
-      parentId: 'desktop',
-      createdAt: Date.now(),
-      modifiedAt: Date.now(),
-      children: [],
+      id: generateId(), name, type: 'folder', parentId: 'desktop',
+      createdAt: Date.now(), modifiedAt: Date.now(), children: [],
     };
     onFileSystemChange(addNode(fileSystem, node));
     setContextMenu(m => ({ ...m, visible: false }));
@@ -158,25 +145,47 @@ const Desktop: React.FC<DesktopProps> = ({
           onMouseDown={e => e.button === 0 && handleIconDragStart(e, icon)}
           onContextMenu={e => handleIconContextMenu(e, icon.id)}
         >
-          <div className="desktop-icon-img">{icon.icon}</div>
+          <div className="desktop-icon-wrap">
+            <AppIcon icon={icon.icon} size={36} color="#f5a623" />
+          </div>
           <div className="desktop-icon-label">{icon.name}</div>
         </div>
       ))}
 
       {contextMenu.visible && (
-        <div className="context-menu" style={{ left: contextMenu.x, top: contextMenu.y }} onClick={e => e.stopPropagation()}>
+        <div
+          className="context-menu"
+          style={{ left: Math.min(contextMenu.x, window.innerWidth - 220), top: Math.min(contextMenu.y, window.innerHeight - 300) }}
+          onClick={e => e.stopPropagation()}
+        >
           {contextMenu.type === 'desktop' ? (
             <>
-              <div className="ctx-item" onClick={() => { onOpenApp('explorer'); setContextMenu(m => ({ ...m, visible: false })); }}>📁 Открыть проводник</div>
-              <div className="ctx-item" onClick={() => { onOpenApp('taskmanager'); setContextMenu(m => ({ ...m, visible: false })); }}>📊 Открыть диспетчер задач</div>
-              <div className="ctx-item" onClick={() => { onOpenApp('system-monitor'); setContextMenu(m => ({ ...m, visible: false })); }}>🖥️ Системный монитор</div>
-              <div className="ctx-item" onClick={() => { onOpenApp('usb-manager'); setContextMenu(m => ({ ...m, visible: false })); }}>🔌 USB Менеджер</div>
+              <div className="ctx-item" onClick={() => { onOpenApp('explorer'); setContextMenu(m => ({ ...m, visible: false })); }}>
+                <IcoFolder size={14} color="currentColor" /> Проводник
+              </div>
+              <div className="ctx-item" onClick={() => { onOpenApp('taskmanager'); setContextMenu(m => ({ ...m, visible: false })); }}>
+                <IcoTaskManager size={14} color="currentColor" /> Диспетчер задач
+              </div>
+              <div className="ctx-item" onClick={() => { onOpenApp('system-monitor'); setContextMenu(m => ({ ...m, visible: false })); }}>
+                <IcoSysmon size={14} color="currentColor" /> Системный монитор
+              </div>
+              <div className="ctx-item" onClick={() => { onOpenApp('usb-manager'); setContextMenu(m => ({ ...m, visible: false })); }}>
+                <IcoUsb size={14} color="currentColor" /> USB Менеджер
+              </div>
               <div className="ctx-divider" />
-              <div className="ctx-item" onClick={createNewFolder}>📁 Создать папку</div>
-              <div className="ctx-item" onClick={createNewFile}>📄 Создать текстовый файл</div>
+              <div className="ctx-item" onClick={createNewFolder}>
+                <IcoNewFolder size={14} color="currentColor" /> Создать папку
+              </div>
+              <div className="ctx-item" onClick={createNewFile}>
+                <IcoNewFile size={14} color="currentColor" /> Новый файл
+              </div>
               <div className="ctx-divider" />
-              <div className="ctx-item" onClick={() => { onOpenApp('settings'); setContextMenu(m => ({ ...m, visible: false })); }}>⚙️ Параметры</div>
-              <div className="ctx-item" onClick={() => { window.location.reload(); }}>🔄 Обновить</div>
+              <div className="ctx-item" onClick={() => { onOpenApp('settings'); setContextMenu(m => ({ ...m, visible: false })); }}>
+                <IcoSettings size={14} color="currentColor" /> Параметры
+              </div>
+              <div className="ctx-item" onClick={() => { window.location.reload(); }}>
+                <IcoTerminal size={14} color="currentColor" /> Перезагрузить
+              </div>
             </>
           ) : (
             <>
@@ -184,9 +193,13 @@ const Desktop: React.FC<DesktopProps> = ({
                 const icon = icons.find(i => i.id === contextMenu.targetId);
                 if (icon) handleIconDoubleClick(icon);
                 setContextMenu(m => ({ ...m, visible: false }));
-              }}>▶️ Открыть</div>
+              }}>
+                <IcoOpen size={14} color="currentColor" /> Открыть
+              </div>
               <div className="ctx-divider" />
-              <div className="ctx-item danger" onClick={() => contextMenu.targetId && deleteIcon(contextMenu.targetId)}>🗑️ Удалить</div>
+              <div className="ctx-item danger" onClick={() => contextMenu.targetId && deleteIcon(contextMenu.targetId)}>
+                <IcoTrash size={14} color="currentColor" /> Удалить
+              </div>
             </>
           )}
         </div>

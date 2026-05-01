@@ -1,8 +1,11 @@
+/* Notepad.css — единый стиль с ОС: плоский, чёткий, без скруглений */
+
 .notepad {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
+  background: #0e0e0e;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .notepad-toolbar {
@@ -10,71 +13,95 @@
   align-items: center;
   gap: 6px;
   padding: 6px 8px;
-  background: #252526;
-  border-bottom: 1px solid #3c3c3c;
+  background: #111;
+  border-bottom: 1px solid #2a2a2a;
   flex-wrap: wrap;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 .toolbar-divider {
   width: 1px;
   height: 20px;
-  background: #444;
+  background: #2a2a2a;
   margin: 0 2px;
 }
 
 .dirty-indicator {
-  color: #ffd700;
-  font-size: 16px;
+  color: #f5a623;
+  font-size: 14px;
   margin-left: 4px;
 }
 
 .notepad-filename {
   padding: 4px 8px;
-  background: #2d2d2d;
-  border-bottom: 1px solid #3c3c3c;
+  background: #0c0c0c;
+  border-bottom: 1px solid #2a2a2a;
 }
 
 .filename-input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #555;
-  color: #ccc;
+  border-bottom: 1px solid #2a2a2a;
+  color: #ddd;
   font-size: 12px;
+  font-family: 'IBM Plex Mono', monospace;
   width: 300px;
   outline: none;
-  padding: 2px 4px;
+  padding: 4px 4px;
+  transition: border-color 0.08s;
 }
 
 .filename-input:focus {
-  border-bottom-color: #0066cc;
+  border-bottom-color: #f5a623;
 }
 
 .filename-input::placeholder {
-  color: #666;
+  color: #555;
 }
 
 .notepad-textarea {
   flex: 1;
-  background: #1e1e1e;
-  color: #d4d4d4;
+  background: #0c0c0c;
+  color: #ccc;
   border: none;
   outline: none;
   padding: 12px;
   resize: none;
-  line-height: 1.6;
+  line-height: 1.5;
   overflow-wrap: break-word;
   word-break: break-word;
   overflow-y: auto;
   overflow-x: auto;
   tab-size: 4;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+}
+
+/* Стилизация скроллбара */
+.notepad-textarea::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.notepad-textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notepad-textarea::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+}
+
+.notepad-textarea::-webkit-scrollbar-thumb:hover {
+  background: #f5a623;
 }
 
 .notepad-statusbar {
   display: flex;
   gap: 16px;
   padding: 4px 12px;
-  background: #007acc;
-  color: #fff;
-  font-size: 12px;
-  font-family: 'Segoe UI', sans-serif;
+  background: #111;
+  border-top: 1px solid #2a2a2a;
+  color: #aaa;
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
 }

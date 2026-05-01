@@ -8,7 +8,7 @@ export default defineConfig({
   root: path.resolve(__dirname),         // корень проекта
   publicDir: 'public',                   // статические файлы (favicon, manifest)
   build: {
-    outDir: 'dist-single',
+    outDir: 'dist',
     emptyOutDir: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'index.html'), // ваш HTML с точкой входа

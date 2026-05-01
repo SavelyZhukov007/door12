@@ -2,96 +2,105 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  border-radius: 16px;
   overflow: hidden;
-  background: rgba(10, 12, 20, 0.75);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  transition: box-shadow 0.15s, transform 0.15s;
+  background: #111;
+  border: 1px solid #222;
+  border-top: 2px solid #333;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.7);
+  transition: box-shadow 0.12s, opacity 0.12s;
   min-width: 300px;
   min-height: 200px;
 }
 
 .window.focused {
-  box-shadow: 0 22px 72px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.14);
+  border-top-color: #f5a623;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.85);
 }
 
 .window.unfocused {
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
-  opacity: 0.92;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+  opacity: 0.88;
 }
 
 .window-titlebar {
   display: flex;
   align-items: center;
-  height: 36px;
-  background: rgba(18, 22, 38, 0.85);
-  padding: 0 8px;
+  height: 32px;
+  background: #151515;
+  padding: 0 0 0 10px;
   user-select: none;
   cursor: move;
   flex-shrink: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(18px);
-}
-
-.window-content {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  background: rgba(10, 14, 28, 0.58);
-  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #1e1e1e;
+  gap: 8px;
 }
 
 .window.unfocused .window-titlebar {
-  background: #1a1a28;
+  background: #101010;
 }
 
 .window-icon {
-  font-size: 16px;
-  margin-right: 8px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.window.focused .window-icon {
+  color: #f5a623;
 }
 
 .window-title {
   flex: 1;
-  color: #e0e0e0;
-  font-size: 13px;
-  font-family: 'Segoe UI', sans-serif;
+  color: #888;
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.02em;
 }
 
-.window.unfocused .window-title {
-  color: #888;
+.window.focused .window-title {
+  color: #ccc;
 }
 
 .window-controls {
   display: flex;
-  gap: 0;
+  margin-left: auto;
+  height: 32px;
 }
 
 .wc-btn {
-  width: 46px;
-  height: 36px;
+  width: 36px;
+  height: 32px;
   background: transparent;
   border: none;
-  color: #aaa;
-  font-size: 13px;
+  color: #444;
+  font-size: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s, color 0.15s;
-  border-radius: 0;
-  margin: -0px;
+  transition: background 0.1s, color 0.1s;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .wc-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: #1e1e1e;
+  color: #aaa;
+}
+
+.wc-btn.minimize:hover {
+  color: #f5a623;
+}
+
+.wc-btn.maximize:hover {
+  color: #4fc3f7;
 }
 
 .wc-btn.close:hover {
-  background: #c42b1c;
+  background: #c0392b;
   color: #fff;
 }
 
@@ -99,74 +108,20 @@
   flex: 1;
   overflow: hidden;
   position: relative;
+  background: #0e0e0e;
 }
 
+/* Resize handles */
 .resize-handle {
   position: absolute;
   background: transparent;
   z-index: 100;
 }
-
-.resize-handle.n {
-  top: 0;
-  left: 4px;
-  right: 4px;
-  height: 4px;
-  cursor: n-resize;
-}
-
-.resize-handle.s {
-  bottom: 0;
-  left: 4px;
-  right: 4px;
-  height: 4px;
-  cursor: s-resize;
-}
-
-.resize-handle.e {
-  right: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 4px;
-  cursor: e-resize;
-}
-
-.resize-handle.w {
-  left: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 4px;
-  cursor: w-resize;
-}
-
-.resize-handle.ne {
-  top: 0;
-  right: 0;
-  width: 8px;
-  height: 8px;
-  cursor: ne-resize;
-}
-
-.resize-handle.nw {
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  cursor: nw-resize;
-}
-
-.resize-handle.se {
-  bottom: 0;
-  right: 0;
-  width: 8px;
-  height: 8px;
-  cursor: se-resize;
-}
-
-.resize-handle.sw {
-  bottom: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  cursor: sw-resize;
-}
+.resize-handle.n  { top: 0; left: 4px; right: 4px; height: 4px; cursor: n-resize; }
+.resize-handle.s  { bottom: 0; left: 4px; right: 4px; height: 4px; cursor: s-resize; }
+.resize-handle.e  { right: 0; top: 4px; bottom: 4px; width: 4px; cursor: e-resize; }
+.resize-handle.w  { left: 0; top: 4px; bottom: 4px; width: 4px; cursor: w-resize; }
+.resize-handle.ne { right: 0; top: 0; width: 8px; height: 8px; cursor: ne-resize; }
+.resize-handle.nw { left: 0; top: 0; width: 8px; height: 8px; cursor: nw-resize; }
+.resize-handle.se { right: 0; bottom: 0; width: 8px; height: 8px; cursor: se-resize; }
+.resize-handle.sw { left: 0; bottom: 0; width: 8px; height: 8px; cursor: sw-resize; }

@@ -1,35 +1,40 @@
+/* Calculator.css — плоский стиль в духе ОС */
+
 .calculator {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
-  font-family: 'Segoe UI', sans-serif;
+  background: #0e0e0e;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .calc-display {
   padding: 16px 20px 8px;
   text-align: right;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #2a2a2a;
   min-height: 90px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background: #0c0c0c;
 }
 
 .calc-expression {
   color: #888;
-  font-size: 14px;
-  min-height: 20px;
+  font-size: 12px;
+  min-height: 18px;
   margin-bottom: 4px;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .calc-value {
-  color: #fff;
-  font-size: 36px;
-  font-weight: 300;
+  color: #f5a623;
+  font-size: 32px;
+  font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .calc-buttons {
@@ -37,61 +42,81 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   flex: 1;
-  background: #333;
+  background: #1a1a1a;
+  border-top: 1px solid #2a2a2a;
 }
 
 .calc-btn {
-  background: #2b2b2b;
+  background: #151515;
   border: none;
-  color: #fff;
+  color: #ccc;
   font-size: 16px;
   cursor: pointer;
-  transition: background 0.1s;
-  padding: 0;
+  transition: background 0.08s;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 12px 0;
+  box-shadow: inset 0 0 0 0 transparent;
 }
 
 .calc-btn:hover {
-  background: #3a3a3a;
+  background: #1e1e1e;
+  color: #f5a623;
 }
 
 .calc-btn:active {
-  background: #505050;
+  background: #2a2a2a;
+  color: #f5a623;
 }
 
 .op-btn {
-  background: #252525;
-  color: #ccc;
-  font-size: 14px;
+  background: #111;
+  color: #aaa;
+  font-size: 18px;
 }
 
 .op-btn:hover {
-  background: #333;
+  background: #1a1a1a;
+  color: #f5a623;
 }
 
 .active-op {
-  background: #2d4a6b;
-  color: #60a5fa;
-  font-size: 22px;
+  background: #1a1a1a;
+  color: #f5a623;
+  border-left: 2px solid #f5a623;
 }
 
 .active-op:hover {
-  background: #3a5a80;
+  background: #1e1e1e;
+  color: #f5a623;
 }
 
 .equals-btn {
-  background: #0066cc;
-  color: #fff;
-  font-size: 22px;
+  background: #f5a623;
+  color: #0c0c0c;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .equals-btn:hover {
-  background: #0077ee;
+  background: #e09510;
+  color: #0c0c0c;
 }
 
 .num-btn {
-  background: #2b2b2b;
+  background: #151515;
   font-size: 18px;
+}
+
+/* Для кнопок C / AC / +/- и т.д. (если есть) */
+.clear-btn {
+  background: #111;
+  color: #c0392b;
+}
+
+.clear-btn:hover {
+  background: #1a1a1a;
+  color: #c0392b;
 }

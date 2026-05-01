@@ -6,13 +6,13 @@ type CellState = { mine: boolean; revealed: boolean; flagged: boolean; count: nu
 type Difficulty = 'easy' | 'medium' | 'hard';
 
 const CONFIGS: Record<Difficulty, { rows: number; cols: number; mines: number }> = {
-  easy:   { rows: 9,  cols: 9,  mines: 10 },
+  easy: { rows: 9, cols: 9, mines: 10 },
   medium: { rows: 16, cols: 16, mines: 40 },
-  hard:   { rows: 16, cols: 30, mines: 99 },
+  hard: { rows: 16, cols: 30, mines: 99 },
 };
 
-const DIRS = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]];
-const NUM_COLORS = ['','#0984e3','#2ed573','#ff4757','#6c5ce7','#d63031','#00cec9','#000','#636e72'];
+const DIRS = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
+const NUM_COLORS = ['', '#0984e3', '#2ed573', '#ff4757', '#6c5ce7', '#d63031', '#00cec9', '#000', '#636e72'];
 
 const buildGrid = (rows: number, cols: number, mines: number, safeR: number, safeC: number): CellState[][] => {
   const grid: CellState[][] = Array.from({ length: rows }, () =>
@@ -46,7 +46,7 @@ const Minesweeper: React.FC<AppProps> = () => {
   const [time, setTime] = useState(0);
   const [best, setBest] = useState<Record<Difficulty, number>>({ easy: 0, medium: 0, hard: 0 });
   const [firstClick, setFirstClick] = useState(true);
-  const timerRef = useRef<ReturnType<typeof setInterval>>();
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const { rows, cols, mines } = CONFIGS[diff];
   const flagCount = grid.flat().filter(c => c.flagged).length;
 
@@ -113,7 +113,7 @@ const Minesweeper: React.FC<AppProps> = () => {
   const reset = () => initGrid(diff);
   const changeDiff = (d: Difficulty) => { setDiff(d); initGrid(d); };
 
-  const cellClass = (cell: CellState, r: number, c: number) => {
+  const cellClass = (cell: CellState, _r: number, _c: number) => {
     if (!cell.revealed) return cell.flagged ? 'ms-cell flagged' : 'ms-cell hidden';
     if (cell.mine) return 'ms-cell mine';
     return 'ms-cell revealed';
@@ -129,7 +129,7 @@ const Minesweeper: React.FC<AppProps> = () => {
     <div className="ms-root">
       <div className="ms-header">
         <div className="ms-diff-btns">
-          {(['easy','medium','hard'] as Difficulty[]).map(d => (
+          {(['easy', 'medium', 'hard'] as Difficulty[]).map(d => (
             <button key={d} className={`ms-diff ${diff === d ? 'active' : ''}`} onClick={() => changeDiff(d)}>
               {d === 'easy' ? 'Легко' : d === 'medium' ? 'Средне' : 'Сложно'}
             </button>

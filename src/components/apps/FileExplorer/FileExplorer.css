@@ -1,9 +1,11 @@
+/* FileExplorer.css — плоский стиль в духе ОС */
+
 .file-explorer {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
-  font-family: 'Segoe UI', sans-serif;
+  background: #0e0e0e;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .fe-toolbar {
@@ -11,32 +13,34 @@
   align-items: center;
   gap: 4px;
   padding: 6px 8px;
-  background: #252526;
-  border-bottom: 1px solid #3c3c3c;
+  background: #111;
+  border-bottom: 1px solid #2a2a2a;
   flex-wrap: wrap;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 .fe-divider {
   width: 1px;
   height: 20px;
-  background: #444;
+  background: #2a2a2a;
   margin: 0 2px;
 }
 
 .fe-breadcrumb {
   padding: 6px 12px;
-  background: #2d2d30;
-  border-bottom: 1px solid #3c3c3c;
-  font-size: 13px;
+  background: #0c0c0c;
+  border-bottom: 1px solid #2a2a2a;
+  font-size: 12px;
 }
 
 .fe-breadcrumb .ant-breadcrumb {
-  color: #ccc;
+  color: #aaa;
 }
 
 .breadcrumb-link {
-  color: #60a5fa;
+  color: #f5a623;
   cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .breadcrumb-link:hover {
@@ -47,6 +51,24 @@
   flex: 1;
   overflow-y: auto;
   padding: 12px;
+}
+
+/* Скроллбар */
+.fe-content::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.fe-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.fe-content::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+}
+
+.fe-content::-webkit-scrollbar-thumb:hover {
+  background: #f5a623;
 }
 
 .fe-content.grid {
@@ -64,8 +86,7 @@
 
 .fe-item {
   cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.15s;
+  transition: background 0.08s;
   user-select: none;
 }
 
@@ -76,33 +97,42 @@
   padding: 8px;
   width: 80px;
   gap: 4px;
+  border: 1px solid transparent;
 }
 
 .fe-content.list .fe-item {
   display: flex;
   align-items: center;
-  padding: 4px 8px;
+  padding: 6px 8px;
   gap: 8px;
+  border: 1px solid transparent;
 }
 
 .fe-item:hover {
-  background: rgba(255, 255, 255, 0.07);
+  background: #1a1a1a;
+  border-color: #2a2a2a;
 }
 
 .fe-item.selected {
-  background: rgba(0, 102, 204, 0.4);
+  background: #1a1a1a;
+  border-left: 2px solid #f5a623;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
 }
 
 .fe-icon {
   flex-shrink: 0;
+  color: #aaa;
 }
 
 .fe-name {
-  color: #d4d4d4;
-  font-size: 12px;
+  color: #ccc;
+  font-size: 11px;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .fe-content.grid .fe-name {
@@ -114,7 +144,7 @@
 .fe-content.list .fe-name {
   flex: 1;
   text-align: left;
-  font-size: 13px;
+  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -122,21 +152,25 @@
 .fe-date,
 .fe-size {
   color: #888;
-  font-size: 12px;
+  font-size: 11px;
   white-space: nowrap;
   min-width: 80px;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .fe-empty {
-  color: #666;
+  color: #555;
   text-align: center;
   padding: 48px;
-  font-size: 14px;
+  font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .fe-statusbar {
   padding: 4px 12px;
-  background: #007acc;
-  color: #fff;
-  font-size: 12px;
+  background: #111;
+  border-top: 1px solid #2a2a2a;
+  color: #aaa;
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
 }

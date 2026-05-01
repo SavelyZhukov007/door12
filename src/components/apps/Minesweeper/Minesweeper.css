@@ -1,21 +1,236 @@
-.ms-root{width:100%;height:100%;background:#0d1117;display:flex;flex-direction:column;font-family:'Courier New',monospace;overflow:hidden;}
-.ms-header{padding:10px 14px 6px;display:flex;flex-direction:column;gap:8px;background:#161b22;border-bottom:1px solid #2d3436;flex-shrink:0;}
-.ms-diff-btns{display:flex;gap:6px;}
-.ms-diff{padding:4px 12px;border:1px solid #3d444d;border-radius:4px;background:#21262d;color:#8b949e;font-size:12px;cursor:pointer;font-family:monospace;transition:all .15s;}
-.ms-diff.active,.ms-diff:hover{background:#0984e3;border-color:#0984e3;color:#fff;}
-.ms-info{display:flex;align-items:center;justify-content:space-between;}
-.ms-counter{font-size:14px;font-weight:bold;color:#e6edf3;min-width:70px;}
-.ms-reset{font-size:20px;background:none;border:none;cursor:pointer;padding:0 6px;transition:transform .1s;}
-.ms-reset:hover{transform:scale(1.2);}
-.ms-banner{padding:8px;text-align:center;font-size:13px;font-weight:bold;flex-shrink:0;}
-.ms-banner.win{background:rgba(46,213,115,.15);color:#2ed573;border-bottom:1px solid #2ed57366;}
-.ms-banner.lose{background:rgba(255,71,87,.15);color:#ff4757;border-bottom:1px solid #ff475766;}
-.ms-scroll{flex:1;overflow:auto;padding:10px;display:flex;justify-content:center;align-items:flex-start;}
-.ms-grid{display:grid;gap:2px;}
-.ms-cell{width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:3px;cursor:pointer;user-select:none;transition:background .1s;font-weight:bold;}
-.ms-cell.hidden{background:#21262d;border:1px solid #3d444d;}
-.ms-cell.hidden:hover{background:#2d333b;}
-.ms-cell.flagged{background:#21262d;border:1px solid #3d444d;font-size:14px;}
-.ms-cell.revealed{background:#0d1117;border:1px solid #1c2128;cursor:default;}
-.ms-cell.mine{background:rgba(255,71,87,.3);border:1px solid #ff4757;}
-.ms-footer{padding:6px 14px;display:flex;justify-content:space-between;font-size:10px;color:#636e72;background:#161b22;border-top:1px solid #2d3436;flex-shrink:0;}
+/* Minesweeper.css — брутальный, плоский стиль */
+
+.ms-root {
+    width: 100%;
+    height: 100%;
+    background: #0e0e0e;
+    display: flex;
+    flex-direction: column;
+    font-family: 'IBM Plex Mono', monospace;
+    overflow: hidden;
+}
+
+.ms-header {
+    padding: 10px 14px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #111;
+    border-bottom: 1px solid #2a2a2a;
+    flex-shrink: 0;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.ms-diff-btns {
+    display: flex;
+    gap: 6px;
+}
+
+.ms-diff {
+    padding: 4px 12px;
+    border: 1px solid #2a2a2a;
+    background: #151515;
+    color: #aaa;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.08s;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.ms-diff.active,
+.ms-diff:hover {
+    background: #f5a623;
+    border-color: #f5a623;
+    color: #0c0c0c;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+}
+
+.ms-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ms-counter {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f5a623;
+    font-family: 'IBM Plex Mono', monospace;
+    min-width: 70px;
+    background: #0c0c0c;
+    border: 1px solid #2a2a2a;
+    padding: 4px 8px;
+    text-align: center;
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.ms-reset {
+    font-size: 18px;
+    background: #151515;
+    border: 1px solid #2a2a2a;
+    cursor: pointer;
+    padding: 4px 10px;
+    color: #aaa;
+    transition: all 0.08s;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    line-height: 1;
+}
+
+.ms-reset:hover {
+    background: #f5a623;
+    border-color: #f5a623;
+    color: #0c0c0c;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+    transform: none;
+    /* отключаем scale */
+}
+
+.ms-banner {
+    padding: 6px 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.ms-banner.win {
+    background: #111;
+    color: #f5a623;
+    border-top: 1px solid #f5a623;
+}
+
+.ms-banner.lose {
+    background: #111;
+    color: #c0392b;
+    border-top: 1px solid #c0392b;
+}
+
+.ms-scroll {
+    flex: 1;
+    overflow: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Скроллбар */
+.ms-scroll::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.ms-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ms-scroll::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+}
+
+.ms-scroll::-webkit-scrollbar-thumb:hover {
+    background: #f5a623;
+}
+
+.ms-grid {
+    display: grid;
+    gap: 1px;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.ms-cell {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    background: #151515;
+    border: 1px solid #2a2a2a;
+    transition: background 0.05s;
+}
+
+.ms-cell.hidden {
+    background: #151515;
+    border: 1px solid #2a2a2a;
+}
+
+.ms-cell.hidden:hover {
+    background: #1e1e1e;
+}
+
+.ms-cell.flagged {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    font-size: 13px;
+    color: #f5a623;
+}
+
+.ms-cell.revealed {
+    background: #0c0c0c;
+    border: 1px solid #1a1a1a;
+    cursor: default;
+    color: #ccc;
+}
+
+.ms-cell.mine {
+    background: #1a1a1a;
+    border: 1px solid #c0392b;
+    color: #c0392b;
+}
+
+/* Цифры 1-8 можно при желании раскрасить, но оставим монохром для строгости */
+.ms-cell.revealed[data-value="1"] {
+    color: #aaa;
+}
+
+.ms-cell.revealed[data-value="2"] {
+    color: #aaa;
+}
+
+.ms-cell.revealed[data-value="3"] {
+    color: #aaa;
+}
+
+.ms-cell.revealed[data-value="4"] {
+    color: #aaa;
+}
+
+.ms-cell.revealed[data-value="5"] {
+    color: #aaa;
+}
+
+.ms-cell.revealed[data-value="6"] {
+    color: #aaa;
+}
+
+.ms-cell.revealed[data-value="7"] {
+    color: #aaa;
+}
+
+.ms-cell.revealed[data-value="8"] {
+    color: #aaa;
+}
+
+.ms-footer {
+    padding: 6px 14px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #888;
+    background: #111;
+    border-top: 1px solid #2a2a2a;
+    flex-shrink: 0;
+    font-family: 'IBM Plex Mono', monospace;
+}

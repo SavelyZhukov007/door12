@@ -231,7 +231,7 @@ const Racing: React.FC<AppProps> = () => {
     );
   };
 
-  const updateAI = useCallback((ai: Car, obstacles: Obstacle[], playerY: number, allAI: Car[]) => {
+  const updateAI = useCallback((ai: Car, obstacles: Obstacle[], _playerY: number, allAI: Car[]) => {
     const s = stateRef.current;
     ai.y += s.speed - ai.speed * 0.35;
 

@@ -1,7 +1,11 @@
+/* TaskManager.css — в стиле ОС: без скруглений, без прозрачности, плоские тени */
+
 .task-manager-shell {
-    color: #eef2ff;
+    color: #ccc;
     display: grid;
-    gap: 18px;
+    gap: 12px;
+    padding: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .task-manager-header {
@@ -9,13 +13,18 @@
     justify-content: space-between;
     gap: 12px;
     align-items: center;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    padding: 10px 12px;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
 .task-list {
-    background: rgba(10, 16, 28, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    background: #0c0c0c;
+    border: 1px solid #2a2a2a;
+    border-top: 2px solid #333;
     overflow: hidden;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
 }
 
 .task-item {
@@ -23,8 +32,8 @@
     grid-template-columns: 1fr auto;
     gap: 12px;
     align-items: center;
-    padding: 14px 18px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 10px 12px;
+    border-bottom: 1px solid #1a1a1a;
 }
 
 .task-item:last-child {
@@ -36,23 +45,72 @@
     gap: 6px;
 }
 
+.task-item-name strong {
+    color: #f5a623;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+}
+
 .task-item-actions {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .task-item-meta {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    color: rgba(255, 255, 255, 0.65);
+    color: #888;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 .task-summary {
     display: grid;
-    gap: 8px;
+    gap: 6px;
+    background: #0e0e0e;
+    border: 1px solid #2a2a2a;
+    padding: 10px 12px;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
 }
 
 .task-summary span {
-    color: #c7d1f0;
+    color: #aaa;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted #1e1e1e;
+    padding: 4px 0;
+}
+
+.task-summary span strong {
+    color: #f5a623;
+    font-weight: 500;
+}
+
+/* Кнопки действий в диспетчере задач (добавляем для единообразия) */
+.task-action-btn {
+    background: #151515;
+    border: 1px solid #2a2a2a;
+    color: #ccc;
+    font-size: 11px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    transition: all 0.08s;
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.task-action-btn:hover {
+    background: #f5a623;
+    border-color: #f5a623;
+    color: #0c0c0c;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.6);
+}
+
+.task-action-btn.danger:hover {
+    background: #c0392b;
+    border-color: #c0392b;
+    color: #fff;
 }
